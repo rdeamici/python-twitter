@@ -240,7 +240,8 @@ class Hashtag(TwitterModel):
 
     def __init__(self, **kwargs):
         self.param_defaults = {
-            'text': None
+            'text': None,
+            'indices': None
         }
 
         for (param, default) in self.param_defaults.items():
@@ -262,6 +263,11 @@ class Url(TwitterModel):
 
         for (param, default) in self.param_defaults.items():
             setattr(self, param, kwargs.get(param, default))
+
+    # @classmethod
+    # def NewFromJsonDict(cls, data, **kwargs):
+
+
 
     def __repr__(self):
         return "URL(URL={url}, ExpandedURL={eurl})".format(
@@ -399,7 +405,7 @@ class Status(TwitterModel):
             'favorite_count': None,
             'favorited': None,
             'full_text': None,
-            'geo': None,
+            'coordinates': None,
             'hashtags': None,
             'id': None,
             'id_str': None,

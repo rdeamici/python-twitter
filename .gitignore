@@ -1,7 +1,7 @@
 *.py[co]
 
 #small test code that contains my keys
-t.py
+#t.py
 
 # Packages
 *.egg
