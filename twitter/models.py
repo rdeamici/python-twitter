@@ -252,6 +252,36 @@ class Hashtag(TwitterModel):
             text=self.text)
 
 
+class User_mention(TwitterModel):
+
+    """ A class representing a User_mention contained in a tweet. """
+
+    def __init__(self, **kwargs):
+        self.param_defaults = {
+            'screen_name': None,
+            'name': None,
+            'id': None,
+            'id_str': None,
+            'indices': None}
+
+        for (param, default) in self.param_defaults.items():
+            setattr(self, param, kwargs.get(param, default))
+
+    # @classmethod
+    # def NewFromJsonDict(cls, data, **kwargs):
+
+
+
+    def __repr__(self):
+        return "User_mention(Screen_Name={screen_name}, name={name}, id={id},id_str={id_str}, indices={indices})".format(
+            screen_name=self.screen_name,
+            name=self.name,
+            id=self.id,
+            id_str=self.id_str,
+            indices=self.indices)
+
+
+
 class Url(TwitterModel):
 
     """ A class representing an URL contained in a tweet. """
@@ -405,7 +435,7 @@ class Status(TwitterModel):
             'favorite_count': None,
             'favorited': None,
             'full_text': None,
-            'coordinates': None,
+            'geo': None,
             'hashtags': None,
             'id': None,
             'id_str': None,
@@ -515,7 +545,7 @@ class Status(TwitterModel):
             if 'urls' in data['entities']:
                 urls = [Url.NewFromJsonDict(u) for u in data['entities']['urls']]
             if 'user_mentions' in data['entities']:
-                user_mentions = [User.NewFromJsonDict(u) for u in data['entities']['user_mentions']]
+                user_mentions = [User_mention.NewFromJsonDict(u) for u in data['entities']['user_mentions']]
             if 'hashtags' in data['entities']:
                 hashtags = [Hashtag.NewFromJsonDict(h) for h in data['entities']['hashtags']]
             if 'media' in data['entities']:
